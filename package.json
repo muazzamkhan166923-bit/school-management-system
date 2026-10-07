@@ -1,0 +1,70 @@
+{
+  "name": "hps-school-management-system",
+  "productName": "School Management System",
+  "version": "1.0.3",
+  "description": "School Management System",
+  "author": "HPS",
+  "main": "app/main.js",
+  "private": true,
+  "devDependencies": {
+    "@electron/fuses": "^2.1.3",
+    "electron": "^44.4.5",
+    "electron-builder": "^26.15.3",
+    "javascript-obfuscator": "^5.8.0"
+  },
+  "scripts": {
+    "bundle": "node build.js",
+    "dist": "node build.js && electron-builder --win nsis --x64"
+  },
+  "build": {
+    "appId": "com.hps.schoolmanagement",
+    "productName": "School Management System",
+    "copyright": "Copyright \u00a9 HPS",
+    "asar": true,
+    "compression": "maximum",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "app/**/*",
+      "package.json",
+      "!**/*.map"
+    ],
+    "extraMetadata": {
+      "main": "app/main.js"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "School Management System",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "deleteAppDataOnUninstall": false,
+      "artifactName": "School-Management-System-Setup-${version}.exe"
+    },
+    "electronFuses": {
+      "runAsNode": false,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true
+    }
+  },
+  "dependencies": {
+    "pg": "^8.16.3"
+  }
+}
